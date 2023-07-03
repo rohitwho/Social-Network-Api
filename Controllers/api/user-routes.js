@@ -6,7 +6,11 @@ const router = require('express').Router()
 router.get('/', async (req, res) => {
     try {
 
-        const getUsers = await uuser.find();
+        const getUsers = await uuser.find(
+            // {$push:{
+            //     thoughts:req.params.
+            // }}
+        );
         res.status(200).json(getUsers)
     } catch (err) {
         console.log(err)

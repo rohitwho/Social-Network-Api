@@ -35,9 +35,31 @@ router.delete('/:thoughtId', async (req, res) => {
     try {
         const delThought = await thoughts.findOneAndDelete({ _id: req.params.thoughtId })
         if (!delThought) {
-            return res.statusCode().json({ message: "Cant find this user " })
+            return res.status().json({ message: "Cant find this user " })
         }
-res.status(200).json({message:'thought Sucessfully deleted'})
+        res.status(200).json({ message: 'thought Sucessfully deleted' })
+    } catch (err) {
+        console.error(err)
+    }
+})
+
+
+// post reaction
+
+router.post('/:thoughtId/reactions', async (req, res) => {
+    try {
+        const addReaction = await thoughts.findOneAndUpdate(
+
+            { _id: req.params.thoughtId },
+            {
+                $push: {
+                    reactions: req.body
+                }
+            },
+            { new: true }
+        )
+        res.status(200).json(addReaction)
+
     } catch (err) {
         console.error(err)
     }
@@ -45,9 +67,26 @@ res.status(200).json({message:'thought Sucessfully deleted'})
 
 
 
+router.delete('/:reactionsId', async (req, res) => {
+    try {
 
+        const delReaction = await thoughts.findOneAndDelete(
+            { _id: req.params.reactionsId },{
+                $pull:{reaction: req.params.reactionsId}
+            },{
+                new:true
+            }
 
+        )
 
+        if (!delReaction) {
+            return res.status(500).json({ message: "Rection Does not exist" })
+        }
+        res.status(200).json({ message: deleted })
+    } catch (err) {
+        console.error(err)
+    }
+})
 
 
 

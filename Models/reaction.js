@@ -3,13 +3,14 @@ const {Schema,model} = require('mongoose');
 
 const reactionSchema = new Schema({
     reactionId:{
-        id:Schema.Types.ObjectId,
-        // default:new ObjectId
+        type:Schema.Types.ObjectId,
+        default: () => new Types.ObjectId()
+        // default: new Schema.Types.ObjectId
     },
     reactionBody:{
         type:String,
         required:true,
-        max:280
+        maxLength:280
     },
     username:{
         type:String,
@@ -21,9 +22,11 @@ const reactionSchema = new Schema({
         default:Date.now
     }
 },{
-    toJSON:true
+    toJSON:{
+        virtuals:true
+    }
 })
 
-const reaction = model("reaction",reactionSchema);
+// const reaction = model("reaction",reactionSchema);
 
-module.exports = reaction;
+module.exports = reactionSchema;

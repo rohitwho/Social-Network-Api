@@ -1,7 +1,7 @@
 
 const connection = require('../Config/connection');
 const thoughts = require('../Models/thought');
-const reaction = require('../Models/reaction');
+
 const uuser = require('../Models/user');
 const thoughtsSeed = require('./thoughtsData');
 const reactionsSeed = require('./reactionData');
@@ -19,14 +19,14 @@ connection.once('open', async () => {
   try {
     await thoughts.deleteMany({});
     await uuser.deleteMany({});
-    await reaction.deleteMany({});
+
 
     await thoughts.insertMany(thoughtsSeed);
-    await reaction.insertMany(reactionsSeed);
+   
     await uuser.insertMany(usersSeed);
 
     console.log(await thoughts.find({}));
-    console.log(await reaction.find({}));
+
     console.log(await uuser.find({}));
 
     console.info('Database Seeded');
