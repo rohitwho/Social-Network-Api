@@ -7,9 +7,7 @@ const thoughtsSeed = require('./thoughtsData');
 const reactionsSeed = require('./reactionData');
 const usersSeed = require('./userData');
 
-console.log(thoughtsSeed);
-console.log(reactionsSeed);
-console.log(usersSeed);
+
 
 connection.on('error', (err) => {
   console.error(err);
@@ -31,7 +29,7 @@ connection.once('open', async () => {
     console.log(await reaction.find({}));
     console.log(await uuser.find({}));
 
-    console.info('Seeding complete! 🌱');
+    console.info('Database Seeded');
   } catch (error) {
     console.error(error);
   }
