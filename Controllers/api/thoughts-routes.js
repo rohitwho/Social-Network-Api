@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 })
 
 
-
+// get thoughts by Id
 router.get('/:thoughtId', async (req, res) => {
     try {
         const getById = await thoughts.findOne({ _id: req.params.thoughtId })
@@ -29,6 +29,34 @@ router.get('/:thoughtId', async (req, res) => {
         console.error(err)
     }
 })
+
+// delete thoughts by id
+router.delete('/:thoughtId', async (req, res) => {
+    try {
+        const delThought = await thoughts.findOneAndDelete({ _id: req.params.thoughtId })
+        if (!delThought) {
+            return res.statusCode().json({ message: "Cant find this user " })
+        }
+res.status(200).json({message:'thought Sucessfully deleted'})
+    } catch (err) {
+        console.error(err)
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// post new thoughts
 
 router.post('/', async (req, res) => {
     try {
