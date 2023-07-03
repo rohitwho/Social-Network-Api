@@ -36,7 +36,9 @@ validator: function(v){
     }
 }
 )
-
+userSchema.virtual('friendCount').get(function(){
+    return this.friends.length
+})
 const uuser = model('user',userSchema);
 
 module.exports = uuser;
