@@ -10,12 +10,8 @@ const {getUsers,
     createUser,
 } = require('../../Controllers/user-routes')
 
-router.route("/").get(getUsers)
-router.route("/:userId").get(userById)
-router.route("/:userId").delete(delById)
-router.route("/").post(createUser)
-router.route("/:userId").put(updateUser)
-
+router.route("/").get(getUsers).post(createUser)
+router.route("/:userId").get(userById).put(updateUser).delete(delById)
 
 
 

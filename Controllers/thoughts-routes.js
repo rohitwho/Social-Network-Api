@@ -32,7 +32,7 @@ const thoughtControllers={
         try {
             const delThought = await thoughts.findOneAndDelete({ _id: req.params.thoughtId })
             if (!delThought) {
-                return res.status().json({ message: "Cant find this user " })
+                return res.status().json({ message: "Can not find this user " })
             }
             res.status(200).json({ message: 'thought Sucessfully deleted' })
         } catch (err) {
@@ -97,8 +97,6 @@ const thoughtControllers={
 
 
 }
-
-
 
 
 

@@ -15,6 +15,7 @@ const userControllers = {
             res.status(200).json(user)
         } catch (err) {
             console.log(err)
+            
         }
 
     },
@@ -41,11 +42,12 @@ const userControllers = {
 
     async updateUser(req, res) {
 try{
+ 
     const update = await uuser.findOneAndUpdate(
 
-        { _id: req.body.userId},
-         {$set: req.body },
-        //  { runValidators: true, new: true }
+        { _id: req.params.userId },
+        { $set: req.body },
+        { runValidators: true, new: true }
     )
     if (!update) {
         return res.status(404).json({ message: 'No user updated' });
@@ -54,10 +56,6 @@ try{
 }catch(err){
     console.error(err)
 }
-       
-
-
-
     },
     //Delete by user id
     async delById(req, res) {
