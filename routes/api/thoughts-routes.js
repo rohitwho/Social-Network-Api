@@ -6,6 +6,7 @@
     findThoughts,
     thoughtById,
     delThought,
+    createThought,
     updateThought,
     postReaction,
     delReaction,
@@ -14,7 +15,7 @@
 
 
 
- router.route('/').get(findThoughts)
+ router.route('/').get(findThoughts).post(createThought);
  router.route('/:userId/new/:thoughtId').post(postThought);
  router.route('/:thoughtId').get(thoughtById).delete(delThought).put(updateThought);
 

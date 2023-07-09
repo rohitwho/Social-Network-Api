@@ -98,12 +98,26 @@ try{
             console.error(err);
         }
     },
-    
+    async createThought(req,res){
+        try{
+            const createThoughts = await thoughts.create(req.body);
+
+            res.status(200).json(createThoughts)
+
+
+
+
+
+
+        }catch(err){
+            console.log(err)
+        }
+    },
     
     // post new thoughts
    async postThought(req, res){
        try {
-            // const createThoughts = await thoughts.create(req.body);
+            
             const user = await uuser.findOneAndUpdate(  { _id: req.params.userId },
                 { $push: { thoughts: req.params.thoughtId } },
                 { new: true })
