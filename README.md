@@ -67,7 +67,7 @@ To start the server, run the following command:
 
 ## Dependencies
 
-Express-Routes,Mongoose,MongoDB,Sequelize,Nodemon
+Express-Routes,Mongoose,MongoDB,Nodemon
 
 ## Language and Technology Used
 
