@@ -33,7 +33,8 @@ validator: function(v){
 },{
     toJSON:{
         virtuals:true
-    }
+    },
+    id:false
 }
 )
 userSchema.virtual('friendCount').get(function(){

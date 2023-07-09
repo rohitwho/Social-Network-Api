@@ -1,17 +1,12 @@
-const { MongoError } = require('mongodb');
+
 const uuser = require('../Models/user');
 
 
 const userControllers = {
-
-
-
     async getUsers(req, res) {
         try {
 
-            const user = await uuser.find(
-
-            );
+            const user = await uuser.find()
             res.status(200).json(user)
         } catch (err) {
             console.log(err)
@@ -26,7 +21,7 @@ const userControllers = {
 
         try {
 
-            const getById = await uuser.findOne({ _id: req.params.userId });
+            const getById = await uuser.findOne({ _id: req.params.userId }).populate('thoughts').populate('friends');
 
             if (!getById) {
                 return res.status(404).json({ message: 'No user with that ID' });
@@ -118,6 +113,40 @@ try{
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

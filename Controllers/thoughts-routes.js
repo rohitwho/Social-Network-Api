@@ -1,4 +1,5 @@
 const thoughts = require('../Models/thought')
+const uuser = require("../Models/user")
 const router = require('express').Router();
 
 
@@ -26,6 +27,27 @@ const thoughtControllers={
             console.error(err)
         }
     },
+
+async updateThought(req,res){
+try{
+
+    const updated = await thoughts.findByIdAndUpdate(
+        {_id :req .params.thoughtId},
+        {$set : req.body},
+        {runValidators:true,new:true}
+
+    )
+    if(!updated){
+        return res.status(404).json({message:"thought does not exist"} )
+    }
+    res.status(200).json({message:"thought have been updated"})
+}catch(err){
+    console.log(err)
+}
+},
+
+
+
     
     // delete thoughts by id
     async delThought(req, res) {
@@ -59,31 +81,38 @@ const thoughtControllers={
         }
     },
     
-     async delReaction(req, res) {
+    async delReaction(req, res) {
         try {
+            const thought = await thoughts.findOneAndUpdate(
+                { _id: req.params.thoughtId },
+                { $pull: { reactions: { _id: req.params.reactionsId } } },
+                { new: true }
+            );
     
-            const delReaction = await thoughts.findOneAndDelete(
-                {_id:req.params.thoughtId},
-                {$pull:{reaction: req.params.reactionsId}},
-                {
-                    new:true
-                }
-    
-            )
-    
-            if (!delReaction) {
-                return res.status(500).json({ message: "Rection Does not exist" })
+            if (!thought) {
+                return res.status(500).json({ message: "Thought or reaction does not exist" });
             }
-            res.status(200).json({ message: "deleted "})
+    
+            res.status(200).json({ message: "Reaction deleted", thought });
         } catch (err) {
-            console.error(err)
+            console.error(err);
         }
     },
+    
+    
     // post new thoughts
    async postThought(req, res){
-        try {
-            const createThoughts = await thoughts.create(req.body);
-            res.status(200).json(createThoughts)
+       try {
+            // const createThoughts = await thoughts.create(req.body);
+            const user = await uuser.findOneAndUpdate(  { _id: req.params.userId },
+                { $push: { thoughts: req.params.thoughtId } },
+                { new: true })
+
+if(!user){
+    return res.status(404).json({message:"user not found"})
+}
+
+            res.status(200).json({message:"done"})
     
     
     
@@ -99,6 +128,8 @@ const thoughtControllers={
 }
 
 
-
+// { _id: req.params.userId },
+// { $push: { friends: req.params.friendId } },
+// { new: true }
 
 module.exports = thoughtControllers;
