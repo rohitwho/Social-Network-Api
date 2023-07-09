@@ -1,6 +1,6 @@
 const thoughts = require('../Models/thought')
 const uuser = require("../Models/user")
-const router = require('express').Router();
+
 
 
 const thoughtControllers={
@@ -20,7 +20,7 @@ const thoughtControllers={
             const getById = await thoughts.findOne({ _id: req.params.thoughtId })
     
             if (!getById) {
-                return res.status(404).json({ message: 'No Thoughts with that ID' });
+                return res.status(404).json({ message: 'No Thoughts found with that ID' });
             }
             res.status(200).json(getById)
         } catch (err) {
@@ -38,9 +38,9 @@ try{
 
     )
     if(!updated){
-        return res.status(404).json({message:"thought does not exist"} )
+        return res.status(404).json({message:"No Thoughts found '"} )
     }
-    res.status(200).json({message:"thought have been updated"})
+    res.status(200).json({message:"Thought have been updated"})
 }catch(err){
     console.log(err)
 }
@@ -54,9 +54,9 @@ try{
         try {
             const delThought = await thoughts.findOneAndDelete({ _id: req.params.thoughtId })
             if (!delThought) {
-                return res.status().json({ message: "Can not find this user " })
+                return res.status().json({ message: "Can not find this thought " })
             }
-            res.status(200).json({ message: 'thought Sucessfully deleted' })
+            res.status(200).json({ message: 'Thought Sucessfully deleted' })
         } catch (err) {
             console.error(err)
         }
@@ -123,10 +123,10 @@ try{
                 { new: true })
 
 if(!user){
-    return res.status(404).json({message:"user not found"})
+    return res.status(404).json({message:"Thought not found"})
 }
 
-            res.status(200).json({message:"done"})
+            res.status(200).json({message:"A new thought have been added"})
     
     
     
@@ -142,8 +142,6 @@ if(!user){
 }
 
 
-// { _id: req.params.userId },
-// { $push: { friends: req.params.friendId } },
-// { new: true }
+
 
 module.exports = thoughtControllers;

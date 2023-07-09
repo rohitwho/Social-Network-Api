@@ -1,11 +1,13 @@
 const { ObjectId } = require('mongodb');
-const {Schema,model} = require('mongoose');
+const {Schema} = require('mongoose');
+
+const dayjs = require('dayjs')
 
 const reactionSchema = new Schema({
     reactionId:{
         type:Schema.Types.ObjectId,
         default: () => new Types.ObjectId()
-        // default: new Schema.Types.ObjectId
+    
     },
     reactionBody:{
         type:String,
@@ -19,15 +21,12 @@ const reactionSchema = new Schema({
     },
     createdAt:{
         type:Date,
-        default:Date.now
+        default:Date.now,
+        get: function(date) {
+            return dayjs(date).format('YYYY-MMM-DD HH:mm:ss');
+          }
     }
-})
-//     toJSON:{
-//         virtuals:true
-//     },
-//     id:false
-// })
-
-// const reaction = model("reaction",reactionSchema);
+},{toJSON:{ getters:true}}
+)
 
 module.exports = reactionSchema;

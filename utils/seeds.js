@@ -4,7 +4,7 @@ const thoughts = require('../Models/thought');
 
 const uuser = require('../Models/user');
 const thoughtsSeed = require('./thoughtsData');
-const reactionsSeed = require('./reactionData');
+
 const usersSeed = require('./userData');
 
 

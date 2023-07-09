@@ -15,8 +15,8 @@ router.route("/:userId").get(userById).put(updateUser).delete(delById)
 
 
 
-router.route("/:userId/friends/:friendId").post(addFriend)
-router.route("/:userId/friends/:friendId").delete(delFriend)
+router.route("/:userId/friends/:friendId").post(addFriend).delete(delFriend)
+
 
 
 
