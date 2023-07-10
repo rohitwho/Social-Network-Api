@@ -16,6 +16,8 @@
 - [License](#license)
 - [Questions](#questions)
 
+  ## Video Link
+  https://drive.google.com/file/d/1rQcSBauCd7zOZqad1tJg_erzW_gERyg1/view?usp=sharing
   
 
 
@@ -35,10 +37,6 @@ The given social network API is a server application that provides various route
 6. Friend List Management: Similarly, POST and DELETE requests in Insomnia can be used to add and remove friends from a user's friend list. Users can establish connections with other users and manage their friend relationships through the API.
 
 Overall, the social network API provides a set of routes that allow users to interact with the application's core entities, including users, thoughts, reactions, and friend lists. It enables the retrieval, creation, modification, and deletion of data through well-defined HTTP endpoints, facilitating the functionality of a social networking platform.
-
-## Screenshot
-
-
 
 
 ## Installation
